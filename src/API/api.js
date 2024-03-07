@@ -1,6 +1,6 @@
 
 const md5 = require('md5');
-const apiUrl = 'http://api.valantis.store:40000/';
+const apiUrl = '//api.valantis.store:40000/'
 const password = 'Valantis';
 
 const generateAuthString = (password) => {

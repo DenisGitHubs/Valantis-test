@@ -1,0 +1,34 @@
+.pagination-container {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-number {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  
+  .pagination-number.active {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .pagination-arrow {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 5px;
+  }

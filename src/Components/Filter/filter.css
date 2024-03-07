@@ -1,0 +1,47 @@
+.filter-menu {
+    margin-top: 20px;
+    text-align: center;
+
+  }
+  
+  .filters {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  .filters li {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .selected {
+    font-weight: bold;
+  }
+  
+  input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    transition: background-color 0.5s ease;
+  }
+  
+  input.active {
+    background-color: white;
+  }
+  
+  button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #ccc;
+    transition: background-color 0.5s ease;
+  }
+  
+  button.active {
+    background-color: #007bff;
+    color: white;
+  }
+  .empty-field {
+    color: red;
+  }

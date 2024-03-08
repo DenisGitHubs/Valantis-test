@@ -1,12 +1,11 @@
 
 import './item.css';
 
-export const ProductItem = ({ items }) => {
+export const ProductItem = ({ items, isFind }) => {
 
     return (
         <div className='items-container'>
-            {items.length === 0 && <div className="loader">Loading...</div>}
-
+            {items.length === 0 && isFind === false && <div className="loader">Loading...</div>}
             {items.length > 0 && (
                 <div className="product-grid">
                     {items.map((item, index) => (

@@ -5,7 +5,7 @@ import { removeFilter, setFilter } from '../../Store/slices/filterSlice';
 import { useEffect } from 'react';
 import { setCurrentPage } from '../../Store/slices/pageSlice';
 
-export const FilterMenu = ({ startSearch, setAllReceivedIDs, setShowNumGoods, setData }) => {
+export const FilterMenu = ({ startSearch, setAllReceivedIDs, setShowNumGoods, setData, setIsFind }) => {
   const [inputValue, setInputValue] = useState('');
   const [showWarning, setShowWarning] = useState(false);
   const [isClick, setIsClick] = useState(false)
@@ -30,6 +30,7 @@ export const FilterMenu = ({ startSearch, setAllReceivedIDs, setShowNumGoods, se
         setIsClick(false)
       }
     } else {
+      setIsFind(false)
       dispatch(setFilter(handleFilter));
     }
   };

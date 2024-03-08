@@ -13,9 +13,10 @@ export const ProductList = () => {
   const [allReceivedIDs, setAllReceivedIDs] = useState([]);
   const [items, setItems] = useState([]);
   const [showNumGoods, setShowNumGoods] = useState(false)
-  const dispatch = useDispatch();
+  const [isFind, setIsFind] = useState(false)
   const {checkPage , currentPage }= useSelector(state => state.page)
   const filter = useSelector(state => state.filter.filter)
+  const dispatch = useDispatch();
 
 // ф-я получения данных, если данных для текущей страницы меньше 50 после удаления дублей
 const secondAdd = useCallback(async (offset, limit, addOffset) => {
@@ -106,11 +107,10 @@ const secondAdd = useCallback(async (offset, limit, addOffset) => {
   }, [checkPage, currentPage, allReceivedIDs, filter])
 // получаем данные по ID, для данных полученных по поиску. 
   useEffect (() => {
-    if(filter !== null) {
+    if(filter !== null && isFind) {
     getNames(getNewSet(data), setItems)
     }
   }, [data, filter])
-
 
 // ф-я для повторного запроса для фильтра "product" т.к. API чувствителен к регистру. здесь делаем заглавной первую букву первого слова
  const secondFilterSearch = async (requestValue) => {
@@ -123,6 +123,7 @@ const secondAdd = useCallback(async (offset, limit, addOffset) => {
 
 // ф-я для поиска товаров по фильтрам
   const startSearch = async(inputValue) => {
+    setIsFind(false)
     setShowNumGoods(false)
     dispatch(setCurrentPage(1))
     setItems([]);
@@ -143,14 +144,15 @@ const secondAdd = useCallback(async (offset, limit, addOffset) => {
       await saveIDFilter(requestValue, filter, setAllReceivedIDs);
     }
     setShowNumGoods(true)
+    setIsFind(true)
   }
 
   return (
     <div className='container'>
-      <FilterMenu startSearch={startSearch} setAllReceivedIDs={setAllReceivedIDs} setShowNumGoods={setShowNumGoods} setData={setData}/>
+      <FilterMenu startSearch={startSearch} setAllReceivedIDs={setAllReceivedIDs} setShowNumGoods={setShowNumGoods} setData={setData} setIsFind={setIsFind}/>
       {allReceivedIDs && showNumGoods && filter !== null && <div>найдено товаров: {allReceivedIDs.length}</div>}
       <h2>Список товаров</h2>
-      <ProductItem items={items}/>
+      <ProductItem items={items} isFind={isFind}/>
       <Pagination allReceivedIDs={allReceivedIDs} onPageChangeNext={onPageChangeNext} setData={setData}/>
     </div>
   );

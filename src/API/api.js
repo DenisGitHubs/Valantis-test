@@ -1,40 +1,39 @@
-
-const md5 = require('md5');
-const apiUrl = 'https://api.valantis.store:41000/';
-const password = 'Valantis';
+const md5 = require("md5");
+const apiUrl = "https://api.valantis.store:41000/";
+const password = "Valantis";
 
 const generateAuthString = (password) => {
-    const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    return md5(`${password}_${timestamp}`);
-}
+  const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+  return md5(`${password}_${timestamp}`);
+};
 
 export async function sendRequest(action, params) {
-    const authString = generateAuthString(password);
-    const headers = {
-        'X-Auth': authString,
-        'Content-Type': 'application/json'
-    };
+  const authString = generateAuthString(password);
+  const headers = {
+    "X-Auth": authString,
+    "Content-Type": "application/json",
+  };
 
-    const body = JSON.stringify({ action, params });
+  const body = JSON.stringify({ action, params });
 
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: headers,
-            body: body
-        });
+  try {
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: headers,
+      body: body,
+    });
 
-        if (response.status === 401) {
-            throw new Error('Ошибка авторизации');
-        }
-
-        const data = await response.json();
-
-        return data
-    } catch (error) {
-        console.error('Произошла ошибка при выполнении запроса:', error);
-        return
+    if (response.status === 401) {
+      throw new Error("Ошибка авторизации");
     }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error("Произошла ошибка при выполнении запроса:", error);
+    return;
+  }
 }
 
 // sendRequest('get_ids', { offset: 10, limit: 3 });
